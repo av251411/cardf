@@ -12,8 +12,8 @@ body {
 
 .stage {
   width: 100%;
-  max-width: 1949px;
-  height: 612px;
+  max-width: 974px;
+  height: 200px;
   perspective: 1000px;
   display: flex;
   justify-content: center;

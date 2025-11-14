@@ -1,56 +1,69 @@
-// script.js
-
-// Récupérer les éléments
 const card = document.getElementById('card');
 const flipBtn = document.getElementById('flipBtn');
-const downloadBtn = document.getElementById('downloadBtn');
-const frontFace = card.querySelector('.front');
-const backFace = card.querySelector('.back');
+const downloadVerticalBtn = document.getElementById('downloadVertical');
+const downloadHorizontalBtn = document.getElementById('downloadHorizontal');
+const frontImg = card.querySelector('.front img');
+const backImg  = card.querySelector('.back img');
 
 // Flip au clic
 flipBtn.addEventListener('click', () => card.classList.toggle('flipped'));
 
-// Swipe sur mobile
+// Swipe mobile
 let startX = 0;
-card.addEventListener('touchstart', (e) => {
-  startX = e.changedTouches[0].screenX;
-});
-card.addEventListener('touchend', (e) => {
+card.addEventListener('touchstart', e => startX = e.changedTouches[0].screenX);
+card.addEventListener('touchend', e => {
   const endX = e.changedTouches[0].screenX;
   if (Math.abs(endX - startX) > 30) card.classList.toggle('flipped');
 });
 
-// Téléchargement recto + verso horizontal
-downloadBtn.addEventListener('click', async () => {
-  try {
-    // Vérifier que html2canvas est chargé
-    if (typeof html2canvas === 'undefined') {
-      alert('html2canvas non chargé !');
-      return;
-    }
+// Utilitaire pour charger une image
+function loadImage(src) {
+  return new Promise(resolve => {
+    const img = new Image();
+    img.crossOrigin = "anonymous"; // pour éviter les erreurs CORS
+    img.onload = () => resolve(img);
+    img.src = src;
+  });
+}
 
-    // Capturer les images directement
-    const canvasFront = await html2canvas(frontFace.querySelector('img'), { backgroundColor: null, scale: 2 });
-    const canvasBack  = await html2canvas(backFace.querySelector('img'), { backgroundColor: null, scale: 2 });
+// Téléchargement vertical (recto haut / verso bas)
+downloadVerticalBtn.addEventListener('click', async () => {
+  const recto = await loadImage(frontImg.src);
+  const verso = await loadImage(backImg.src);
 
-    // Canvas combiné horizontal
-    const combinedCanvas = document.createElement('canvas');
-    combinedCanvas.width = canvasFront.width + canvasBack.width;
-    combinedCanvas.height = Math.max(canvasFront.height, canvasBack.height);
-    const ctx = combinedCanvas.getContext('2d');
+  const canvas = document.createElement('canvas');
+  canvas.width = Math.max(recto.width, verso.width);
+  canvas.height = recto.height + verso.height;
+  const ctx = canvas.getContext('2d');
 
-    ctx.drawImage(canvasFront, 0, 0);                // recto à gauche
-    ctx.drawImage(canvasBack, canvasFront.width, 0); // verso à droite
+  ctx.drawImage(recto, 0, 0);
+  ctx.drawImage(verso, 0, recto.height);
 
-    // Télécharger le PNG combiné
-    combinedCanvas.toBlob((blob) => {
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = 'carte_combine_horizontal.png';
-      a.click();
-    });
+  canvas.toBlob(blob => {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'carte_verticale.png';
+    a.click();
+  });
+});
 
-  } catch (err) {
-    alert('Erreur lors du téléchargement : ' + err);
-  }
+// Téléchargement horizontal (recto gauche / verso droite)
+downloadHorizontalBtn.addEventListener('click', async () => {
+  const recto = await loadImage(frontImg.src);
+  const verso = await loadImage(backImg.src);
+
+  const canvas = document.createElement('canvas');
+  canvas.width = recto.width + verso.width;
+  canvas.height = Math.max(recto.height, verso.height);
+  const ctx = canvas.getContext('2d');
+
+  ctx.drawImage(recto, 0, 0);
+  ctx.drawImage(verso, recto.width, 0);
+
+  canvas.toBlob(blob => {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'carte_horizontale.png';
+    a.click();
+  });
 });
