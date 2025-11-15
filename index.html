@@ -1,30 +1,26 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Carte Virtuelle</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cartes Virtuelles</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="stage" id="stage">
-    <div class="card" id="card">
-      <div class="face front">
-        <img src="images/recto.png" alt="Recto">
-      </div>
-      <div class="face back">
-        <img src="images/verso.png" alt="Verso">
-      </div>
-    </div>
+  <div id="cardsContainer"></div>
+
+  <div class="controls-global">
+    <button class="btn download" id="downloadAllPDF">Télécharger toutes les cartes en PDF</button>
   </div>
 
-  <div class="controls">
-    <button class="btn flip" id="flipBtn">Retourner</button>
-    <button class="btn download" id="downloadVertical">Télécharger</button>
-    
+  <!-- Popup QR -->
+  <div id="qrModal">
+    <span id="qrModalClose">&times;</span>
+    <img id="qrModalImg" src="" alt="QR Code" />
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
