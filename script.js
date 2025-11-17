@@ -41,7 +41,7 @@ people.forEach((person,index)=>{
     <button class="btn flip"><span class="material-icons">rotate_right</span></button>
     <button class="btn download-vertical"><span class="material-icons">image</span></button>
     <button class="btn download-pdf"><span class="material-icons">picture_as_pdf</span></button>
-    <img class="qr-code" src="${person.qr}" alt="QR Code ${person.nom}" width="50">
+    <img class="qr-code" src="${person.qr}" alt="QR Code ${person.nom}" width="40">
   </div>
   `;
 

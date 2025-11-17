@@ -10,10 +10,17 @@ h1 {
   margin-bottom: 15px;
 }
 
+#logo {
+  width: 90px;
+  height: 55px;
+  display: block;
+  margin: 0 auto 15px auto;
+}
+
 #cardsContainer {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 16px; /* espace horizontal et vertical */
   justify-content: center;
 }
 
@@ -22,6 +29,7 @@ h1 {
   max-width: 320px;
   aspect-ratio: 5/3;
   perspective: 1200px;
+  margin-bottom: 16px;
 }
 
 .card {
@@ -39,7 +47,7 @@ h1 {
 }
 
 .card.selected {
-  outline: 3px solid red; /* sélection avec outline pour ne pas décaler */
+  outline: 3px solid rgb(97, 166, 75);
 }
 
 .face {
@@ -66,19 +74,32 @@ h1 {
   display: flex;
   gap: 8px;
   justify-content: center;
+  flex-wrap: wrap; /* permet aux boutons de passer à la ligne sur mobile */
   align-items: center;
 }
 
 button.btn {
-  padding: 8px 12px;
+  padding: 6px 10px;
   border-radius: 8px;
   border: none;
   cursor: pointer;
   font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
 }
 
-button.flip { background: #06b6d4; color: #000; }
-button.download, button.download-vertical, button.download-pdf { background: #fff; color: #000; border: 1px solid #000; }
+button.flip {
+  background: #06b6d4; /* couleur bleue rétablie */
+  color: #000;
+}
+
+button.download, button.download-vertical, button.download-pdf {
+  background: #fff;
+  color: #000;
+  border: 1px solid #000;
+}
 
 .showAllCardsBtn {
   padding: 8px 12px;
@@ -97,9 +118,34 @@ button.download, button.download-vertical, button.download-pdf { background: #ff
   color: #fff;
 }
 
+#searchInput {
+  width: 90%;
+  max-width: 400px;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #666;
+  margin-bottom: 8px;
+}
+
+#downloadAllPDF {
+  display: block;       /* permet de centrer avec margin auto */
+  margin: 10px auto 20px auto; /* top, horizontal auto, bottom */
+}
+
+.qr-code {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  width: 35px;
+  height: auto;
+}
+
+.qr-code:hover {
+  transform: scale(1.2);
+}
+
 /* Modal QR Code */
 #qrModal {
-  display: none; /* caché au départ */
+  display: none;
   position: fixed;
   top:0;
   left:0;
@@ -130,36 +176,8 @@ button.download, button.download-vertical, button.download-pdf { background: #ff
   cursor: pointer;
   user-select: none;
 }
-#searchInput {
-  width: 300px; /* ou 100% si tu veux qu’il prenne tout l’espace disponible */
-  max-width: 400px;
-  padding: 8px;
-  border-radius: 6px;
-  border: 1px solid #666;
-}
-.qr-code {
-  cursor: pointer; /* indique que c'est cliquable */
-  transition: transform 0.2s ease;
-}
 
-.qr-code:hover {
-  transform: scale(1.1); /* petit effet zoom au survol */
-}
-#downloadAllPDF {
-  margin-top: 10px; /* espace au-dessus du bouton */
-  margin-bottom: 20px; /* espace en dessous si nécessaire */
-}
-#logo {
-  width: 90px;      /* largeur fixe */
-  height: 55px;     /* hauteur fixe */
-  display: block;   /* pour être sur une ligne seule */
-  margin: 0 auto 15px auto; /* centré horizontalement et espace dessous */
-}
-
-#cardsContainer {
-  display: flex;
-  flex-wrap: wrap;
-  row-gap: 24px;   /* espace vertical */
-  column-gap: 32px; /* espace horizontal */
-  justify-content: center;
+.material-icons {
+  font-size: 18px !important; /* taille réduite pour mobile */
+  line-height: 1;
 }
