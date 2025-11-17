@@ -127,11 +127,18 @@ button.download, button.download-vertical, button.download-pdf {
   margin-bottom: 8px;
 }
 
+/* Bouton Télécharger toutes les cartes */
 #downloadAllPDF {
-  display: block;       /* permet de centrer avec margin auto */
-  margin: 10px auto 20px auto; /* top, horizontal auto, bottom */
+  display: inline-block; /* pour centrer correctement */
+  margin: 15px auto 20px auto; /* top et bottom spacing, centré horizontalement */
+  padding: 10px 16px;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 8px;
+  border: 1px solid #000;
+  background: #fff;
+  cursor: pointer;
 }
-
 .qr-code {
   cursor: pointer;
   transition: transform 0.2s ease;
@@ -164,6 +171,16 @@ button.download, button.download-vertical, button.download-pdf {
   object-fit: contain;
   border-radius: 12px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.6);
+  margin-bottom: 20px; /* espace entre QR et nom */
+}
+
+
+#qrModalName {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
 }
 
 #qrModalClose {
@@ -180,4 +197,11 @@ button.download, button.download-vertical, button.download-pdf {
 .material-icons {
   font-size: 18px !important; /* taille réduite pour mobile */
   line-height: 1;
+}
+
+/* Fix espace mobile entre les boutons et la carte suivante */
+@media (max-width: 600px) {
+  .controls-card {
+    margin-bottom: 20px !important; /* espace supplémentaire */
+  }
 }
