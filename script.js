@@ -6,7 +6,7 @@ const names = [
   "GOUDON Thierry","GRANDIDIER Mickaël","GUICHEBARON Ghislain","GUITTARD Lionel","HARD Xavier",
   "KERMA Adda","LACROIX Michel","LE BLAY Gwenael","LECHAT Jérome","MASSART Nicolas",
   "MELCHIOR Arthur","NIAKATE Oussouby","PAPEGAEY Christophe","PETIOT Stéphane","PETIT Stéphane",
-  "POURCHIER Frédéric","RIMBERT Alainn","SABATIE Jean pierre","SERRANO Christophe","SIMON Jean",
+  "POURCHIER Frédéric","RIMBERT Alain","SABATIE Jean pierre","SERRANO Christophe","SIMON Jean",
   "SOLVES Éric","TRIBALLEAU Julien","TRIQUET Loïc","WYPYCH Alain"
 ];
 
@@ -78,7 +78,7 @@ people.forEach((person,index)=>{
     canvas.toBlob(blob=>{
       const a=document.createElement('a');
       a.href=URL.createObjectURL(blob);
-      a.download = `${person.nom}_vertical.png`;
+      a.download = `${person.nom}.png`;
       a.click();
     });
   });
