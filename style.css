@@ -202,6 +202,6 @@ button.download, button.download-vertical, button.download-pdf {
 /* Fix espace mobile entre les boutons et la carte suivante */
 @media (max-width: 600px) {
   .controls-card {
-    margin-bottom: 20px !important; /* espace supplémentaire */
+    margin-bottom: 28px !important; /* espace supplémentaire */
   }
 }
