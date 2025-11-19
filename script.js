@@ -69,6 +69,7 @@ people.forEach((person,index)=>{
     const ratio = 5/3;
     const width = 800;
     const height = width / ratio;
+    const gap = 40; // <-- espace entre les deux images
     const canvas = document.createElement('canvas');
     canvas.width = width;
     canvas.height = height*2;
@@ -120,6 +121,7 @@ people.forEach((person,index)=>{
     const qrModalImg = document.getElementById('qrModalImg');
     qrModal.style.display='flex';
     qrModalImg.src = qrImg.src;
+    qrModalName.textContent = person.nom;  // afficher le nom de la personne
   });
 });
 
@@ -226,3 +228,5 @@ showAllBtns.forEach(btn => {
 // --- Initialisation ---
 updateShowAllButtons();
 searchMessage.textContent = "";
+
+
